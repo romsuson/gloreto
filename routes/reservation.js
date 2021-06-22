@@ -84,6 +84,62 @@ router.route('/reserve').post((req, res) => {
 });
 
 
+router.route('/reserve_past').post((req, res) => {
+
+  Booking_Reservation.find({ createdAt: {$gte:req.body.from,$lt:req.body.to},status: { $ne: 'Cancelled' }})
+      .then(highlight => res.json(highlight))
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
+  router.route('/reserve_current').post((req, res) => {
+
+    Booking_Reservation.find({ createdAt: {$gte:req.body.from,$lte:req.body.to},status: { $ne: 'Cancelled' }})
+        .then(highlight => res.json(highlight))
+        .catch(err => res.status(400).json('Error: ' + err));
+    });
 
 
+    router.route('/cancelled_reserve').post((req, res) => {
+
+      Booking_Reservation.find({ status: 'Cancelled'})
+          .then(highlight => res.json(highlight))
+          .catch(err => res.status(400).json('Error: ' + err));
+      });
+
+      router.route('/all_reserve').post((req, res) => {
+
+        Booking_Reservation.find({ status: { $ne: 'Cancelled' }})
+            .then(highlight => res.json(highlight))
+            .catch(err => res.status(400).json('Error: ' + err));
+        });
+        router.route('/reserve_past_cancelled').post((req, res) => {
+
+          Booking_Reservation.find({ createdAt: {$gte:req.body.from,$lt:req.body.to},status: 'Cancelled' })
+              .then(highlight => res.json(highlight))
+              .catch(err => res.status(400).json('Error: ' + err));
+          });
+          router.route('/reserve_current_cancelled').post((req, res) => {
+        
+            Booking_Reservation.find({ createdAt: {$gte:req.body.from,$lte:req.body.to},status: 'Cancelled' })
+                .then(highlight => res.json(highlight))
+                .catch(err => res.status(400).json('Error: ' + err));
+            });
+
+            router.route('/reserve_all').post((req, res) => {
+              console.log('req.body.val: ',req.body)
+              Booking_Reservation.find({ _partition: req.body.val})
+                  .then(exercises => res.json(exercises))
+                  .catch(err => res.status(400).json('Error: ' + err));
+              });
+              router.route('/reserve_cancelled').post((req, res) => {
+                console.log('req.body.val: ',req.body)
+                Booking_Reservation.find({ _partition: req.body.val, status: 'Cancelled' })
+                    .then(exercises => res.json(exercises))
+                    .catch(err => res.status(400).json('Error: ' + err));
+                });
+                router.route('/reserve_confirm').post((req, res) => {
+                  console.log('req.body.val: ',req.body)
+                  Booking_Reservation.find({ _partition: req.body.val, status: 'Confirmed' })
+                      .then(exercises => res.json(exercises))
+                      .catch(err => res.status(400).json('Error: ' + err));
+                  });
 module.exports = router;

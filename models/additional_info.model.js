@@ -17,6 +17,7 @@ const additional_infoSchema = new Schema({
   website: {type: String},
   address: {type: String},
   hotel_city: {type: String},
+  createdAt:{type: Int32}
 }, {
   timestamps: true,
 });

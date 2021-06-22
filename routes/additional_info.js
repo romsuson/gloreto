@@ -67,8 +67,53 @@ router.route('/View_Additional_Info').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
     });
 
+        router.route('/add__Additional_Info').post((req, res) => {
+
+          
+            const newAnemeties = new Additional_Info({
+                header_image: "",
+                header_text: "",
+                header_subtext: "",
+                hotel_image: "",
+                hotel_name: "",
+                hotel_info: "",
+                _partition: req.body.val,
+                email: "",
+                mobile: "",
+                tel_no: "",
+                website: "",
+                address: "",
+                hotel_city: "",
+                createdAt: req.body.date
+ 
+            });
+          
+            newAnemeties.save()
+            .then(() => res.json('Added!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+          });
+          
 
 
+          router.route('/web_past').post((req, res) => {
 
-
+            Additional_Info.find({ createdAt: {$gte:req.body.from,$lt:req.body.to}})
+                .then(highlight => res.json(highlight))
+                .catch(err => res.status(400).json('Error: ' + err));
+            });
+            router.route('/web_current').post((req, res) => {
+          
+                Additional_Info.find({ createdAt: {$gte:req.body.from,$lte:req.body.to}})
+                  .then(highlight => res.json(highlight))
+                  .catch(err => res.status(400).json('Error: ' + err));
+              });
+          
+          
+              router.route('/web_all').post((req, res) => {
+          
+                Additional_Info.find({createdAt: { $ne: null }})
+                    .then(highlight => res.json(highlight))
+                    .catch(err => res.status(400).json('Error: ' + err));
+                });
+          
 module.exports = router;

@@ -34,8 +34,13 @@ const carousel_header = require('./routes/carousel_header');
 const about_hotel = require('./routes/about_hotel');
 const hotel_offer = require('./routes/hotel_offer');
 const video_area = require('./routes/video_area');
+const Checkin = require('./routes/checkin');
+const Checkout = require('./routes/checkout');
+const Goods = require('./routes/goods');
+const Sales_History = require('./routes/sales_history');
 
 
+app.use('/sales_history', Sales_History);
 app.use('/exercises', exercisesRouter);
 app.use('/users', usersRouter);
 app.use('/room_type', room_typeRouter);
@@ -52,7 +57,9 @@ app.use('/carousel_header', carousel_header);
 app.use('/about_hotel', about_hotel);
 app.use('/hotel_offer', hotel_offer);
 app.use('/video_area', video_area);
- 
+app.use('/Checkin', Checkin);
+app.use('/Checkout', Checkout);
+app.use('/Goods', Goods);
 
 //development
 /*app.listen(port, () => {
