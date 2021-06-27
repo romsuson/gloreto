@@ -23,6 +23,7 @@ const room_typeSchema = new Schema({
       extension: {type: String},
       hotel_address: {type: String},
       hotel_name: {type: String},
+      video: {type: String},
 
 
 }, {
