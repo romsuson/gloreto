@@ -64,5 +64,28 @@ router.route('/logins').post((req, res) => {
 });
 
 
+router.route('/update_video').post((req, res) => {
+
+
+  console.log('work here')
+  
+      Task.updateMany({_partition:req.body.id}, 
+        {$set: {video:req.body.video}}, function (err, docs) {
+        if (err){
+          res.status(400).json('Error: ' + err)
+        }
+        else{
+          res.json('updated!')
+        }
+      });
+      /*Task.findById(req.body.id)
+      .then(exercise => {
+        exercise.img = req.body.img;
+        exercise.save()
+          .then(() => res.json('updated!'))
+          .catch(err => res.status(400).json('Error: ' + err));
+      })
+      .catch(err => res.status(400).json('Error: ' + err));*/
+  });
 
 module.exports = router;
