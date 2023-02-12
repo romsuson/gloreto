@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 var Int32 = require('mongoose-int32');
 const Schema = mongoose.Schema;
-
+ 
 const adminSchema = new Schema({
     _partition: {type: String},
       address: {type: String },
