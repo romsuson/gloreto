@@ -20,6 +20,7 @@ const additional_infoSchema = new Schema({
   createdAt:{type: Int32},
   lat: {type: String},
   lng: {type: String},
+  showOnMainHotel: {type: String},
   idvalidations: {type: String},
   tags: [{
     type: String

@@ -190,4 +190,10 @@ router.route('/update_tags').post((req, res) => {
             .then(highlight => res.json(highlight))
             .catch(err => res.status(400).json('Error: ' + err));
         });
+
+        router.route('/GloretoHotels').post((req, res) => {
+          Additional_Info.find({ showOnMainHotel: '1'})
+              .then((exercises) => {res.json(exercises)})
+              .catch(err => res.status(400).json('Error: ' + err));
+          });
 module.exports = router;
